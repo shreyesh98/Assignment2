@@ -1,0 +1,59 @@
+[
+  {
+    "type": "text",
+    "name": "fname",
+    "id": "fname",
+    "value": "Shreyesh",
+    "readonly": true,
+    "required": true
+  },
+  {
+    "type": "textarea",
+    "name": "remarks",
+    "id": "remarks",
+    "value": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa sapiente doloremque voluptatum eveniet quidem necessitatibus aliquam vero dolor modi ab quod esse adipisci impedit magnam a",
+    "maxlength": 100,
+    "rows": 4,
+    "cols": 50
+  },
+  {
+    "type": "select",
+    "name": "gender",
+    "id": "options",
+    "value": [
+      {
+        "key": "M",
+        "value": "Male",
+        "isSelected": true
+      },
+      {
+        "key": "F",
+        "value": "Female"
+      },
+      {
+        "key": "Others",
+        "value": "Transgender"
+      }
+    ]
+  },
+  {
+    "type": "email",
+    "id": "email",
+    "pattern": ".+@globex.com",
+    "size": 30,
+    "required": true,
+    "value": "shreyesh.swargam@ics-global.in"
+  },
+  {
+    "type": "password",
+    "id": "password",
+    "name": "password",
+    "minlength": 8,
+    "required": true,
+    "value": "shreyeshs"
+  },
+  {
+    "type": "button",
+    "value": "Button"
+  }
+]

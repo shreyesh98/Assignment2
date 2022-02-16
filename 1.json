@@ -4,17 +4,17 @@
     "name": "fname",
     "id": "fname",
     "value": "Shreyesh",
-    "readonly": true,
     "required": true
   },
   {
     "type": "textarea",
     "name": "remarks",
     "id": "remarks",
-    "value": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Culpa sapiente doloremque voluptatum eveniet quidem necessitatibus aliquam vero dolor modi ab quod esse adipisci impedit magnam a",
+    "value": "",
     "maxlength": 100,
     "rows": 4,
-    "cols": 50
+    "cols": 50,
+    "required": true
   },
   {
     "type": "select",

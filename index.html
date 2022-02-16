@@ -13,52 +13,66 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
-    <div style="text-align: center; margin-top: 10%">
+    <div style="text-align: center; margin-top: 1%">
       <h1>Assignment 2</h1>
       <div class="test"></div>
       <div class="result"></div>
+      <div class="button"></div>
     </div>
     <script>
       $(".test").load("./1.html", function () {
         $.getJSON("./1.json", function (data) {
-          const data1 = data[0];
-          const data2 = data[1];
-          const data3 = data[2];
-          const data4 = data[3];
-          const data5 = data[4];
-          const data6 = data[5];
-          console.log();
-          $(".result").append(`<label for=${data1.id}>First Name: </label>`);
-          $(".result").append(
-            `<input type=${data1.type} id=${data1.id} name=${data1.name} value=${data1.value} readonly=${data1.readonly} required=${data1.required}></input><br><br>`
-          );
+          for (let emp in data) {
+            let person = data[emp];
+            function f1() {
+              $(".button").click(function () {
+                const m = document.getElementById(person.id).value;
+                if (m === "" && person.required === true) {
+                  alert(`${person.type} cannot be blank`);
+                }
+              });
+            }
+            if (person.type === "text") {
+              $(".result").append(
+                `<label for=${person.id}>First Name: </label>`
+              );
+              $(".result").append(
+                `<input type=${person.type} id=${person.id} name=${person.name} value=${person.value}></input><br><br>`
+              );
+              f1();
+            } else if (person.type === "textarea") {
+              $(".result").append(`<label for=${person.id}>Textarea: </label>`);
+              $(".result").append(
+                `<textarea id=${person.id} name=${person.name} rows=${person.rows} cols=${person.cols}>${person.value}</textarea><br><br>`
+              );
+              f1();
+            } else if (person.type === "email") {
+              $(".result").append(`<label for=${person.id}>Email: </label>`);
+              $(".result").append(
+                `<input type=${person.type} id=${person.id} pattern=${person.pattern} size=${person.size} value=${person.value}></input><br><br>`
+              );
+              f1();
+            } else if (person.type === "password") {
+              $(".result").append(`<label for=${person.id}>Password: </label>`);
+              $(".result").append(
+                `<input type=${person.type} id=${person.id} name=${person.name} minlength=${person.minlength}  value="${person.value}"></input><br><br>`
+              );
+              f1();
+            } else if (person.type === "select") {
+              $(".result").append(`<label for=${person.id}>Gender: </label>`);
 
-          $(".result").append(`<label for=${data2.id}>Textarea: </label>`);
-          $(".result").append(
-            `<textarea id=${data2.id} name=${data2.name} rows=${data2.rows} cols=${data2.cols}>${data2.value}</textarea><br><br>`
-          );
-
-          $(".result").append(`<label for=${data3.id}>Gender: </label>`);
-          $(".result").append(
-            `<select id=${data3.id} name=${data3.gender}>
-                  <option value=${data3.value[0].value} selected=${data3.value[0].isSelected}>${data3.value[0].key}</option>
-                  <option value=${data3.value[1].value}>${data3.value[1].key}</option>
-                  <option value=${data3.value[2].value}>${data3.value[2].key}</option>
-                  </select><br><br>`
-          );
-
-          $(".result").append(`<label for=${data4.id}>Email: </label>`);
-          $(".result").append(
-            `<input type=${data4.type} id=${data4.id} pattern=${data4.pattern} size=${data4.size} required=${data4.required} value=${data4.value}></input><br><br>`
-          );
-
-          $(".result").append(`<label for=${data5.id}>Password: </label>`);
-          $(".result").append(
-            `<input type=${data5.type} id=${data5.id} name=${data5.name} minlength=${data5.minlength} required=${data5.required} value="${data5.value}"></input><br><br>`
-          );
-          $(".result").append(
-            `<input type=${data6.type} value=${data6.value}></input>`
-          );
+              for (let gen in person.value) {
+                const genders = person.value[gen];
+                $(".result").append(
+                  `<select id=${person.id} name=${person.gender}><option value=${genders.value} isSelected=${genders.isSelected}>${genders.key}</option></select><br><br>`
+                );
+              }
+            } else if (person.type === "button") {
+              $(".button").append(
+                `<input type=${person.type} value=${person.value}></input>`
+              );
+            }
+          }
         });
       });
     </script>

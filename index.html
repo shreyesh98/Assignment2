@@ -5,6 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Assignment 2</title>
+    <style>
+      .focused {
+        background: #abcdef;
+      }
+    </style>
     <script
       src="https://code.jquery.com/jquery-3.6.0.js"
       integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -28,7 +33,13 @@
               $(".button").click(function () {
                 const m = document.getElementById(person.id).value;
                 if (m === "" && person.required === true) {
-                  alert(`${person.type} cannot be blank`);
+                  alert(`${person.name} cannot be blank`);
+                  $(".result").delegate("*", "focus blur", function () {
+                    const elem = $(this);
+                    setTimeout(function () {
+                      elem.toggleClass("focused", elem.is(":focus"));
+                    }, 0);
+                  });
                 }
               });
             }
@@ -41,26 +52,25 @@
               );
               f1();
             } else if (person.type === "textarea") {
-              $(".result").append(`<label for=${person.id}>Textarea: </label>`);
+              $(".result").append(`<label for=${person.id}>Remarks: </label>`);
               $(".result").append(
                 `<textarea id=${person.id} name=${person.name} rows=${person.rows} cols=${person.cols}>${person.value}</textarea><br><br>`
               );
-              f1();
+              // f1();
             } else if (person.type === "email") {
               $(".result").append(`<label for=${person.id}>Email: </label>`);
               $(".result").append(
                 `<input type=${person.type} id=${person.id} pattern=${person.pattern} size=${person.size} value=${person.value}></input><br><br>`
               );
-              f1();
+              // f1();
             } else if (person.type === "password") {
               $(".result").append(`<label for=${person.id}>Password: </label>`);
               $(".result").append(
                 `<input type=${person.type} id=${person.id} name=${person.name} minlength=${person.minlength}  value="${person.value}"></input><br><br>`
               );
-              f1();
+              // f1();
             } else if (person.type === "select") {
               $(".result").append(`<label for=${person.id}>Gender: </label>`);
-
               for (let gen in person.value) {
                 const genders = person.value[gen];
                 $(".result").append(
